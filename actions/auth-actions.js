@@ -2,6 +2,7 @@
 
 
 import {createUser} from "@/lib/user";
+import {hashUserPassword} from "@/lib/hash";
 
 export async function signup(prevState, formData) {
     const email = formData.get('email');
@@ -23,8 +24,11 @@ export async function signup(prevState, formData) {
         }
     }
 
+    const hashedPassword = hashUserPassword(password);
+
+
     //store it in db
-    createUser(email, password);
+    createUser(email, hashedPassword);
 
 
 }
